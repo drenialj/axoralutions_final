@@ -22,7 +22,6 @@ export default function RootLayout({
         <main className="min-h-screen pt-16 sm:pt-20">
           {children}
         </main>
-
         <footer className="bg-[#101010] border-t border-white/5">
           <div className="container mx-auto py-8 sm:py-10">
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">

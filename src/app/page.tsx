@@ -4,6 +4,7 @@ import { useEffect, useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { ArrowRight } from 'lucide-react';
 import ProcessSection from "@/components/sections/ProcessSection";
+import Chatbot from "@/components/chatbot/Chatbot";
 
 export default function Home() {
   const [currentWordIndex, setCurrentWordIndex] = useState(0);
@@ -476,10 +477,11 @@ export default function Home() {
               </motion.a>
             </motion.div>
           </motion.div>
-    </div>
+        </div>
       </motion.section>
 
       <ProcessSection />
+      <Chatbot />
     </>
   );
 }
