@@ -249,12 +249,12 @@ export default function Home() {
       <motion.section 
         initial="hidden"
         whileInView="visible"
-        viewport={{ once: true, margin: "-100px", amount: 0.3 }}
+        viewport={{ once: true, margin: "-50px", amount: 0.2 }}
         variants={sectionVariants}
         id="leistungen" 
-        className="py-12 sm:py-20 bg-gradient-to-b from-[#0c0c0d] to-[#101010]"
+        className="py-12 sm:py-20 bg-gradient-to-b from-[#0c0c0d] to-[#101010] min-h-[50vh] sm:min-h-0"
       >
-        <div className="container mx-auto px-4">
+        <div className="container mx-auto px-4 sm:px-6">
           <motion.div
             variants={fadeInUp}
             className="text-center mb-8 sm:mb-16"
@@ -263,7 +263,7 @@ export default function Home() {
               initial={{ opacity: 0 }}
               whileInView={{ opacity: 1 }}
               transition={{ duration: 0.5 }}
-              className="text-purple-400 text-sm font-medium tracking-wider uppercase"
+              className="text-purple-400 text-sm font-medium tracking-wider uppercase block"
             >
               Unsere Services
             </motion.span>
@@ -279,7 +279,7 @@ export default function Home() {
 
           <motion.div
             variants={staggerChildren}
-            className="grid grid-cols-1 md:grid-cols-3 gap-4 sm:gap-8"
+            className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 sm:gap-6 md:gap-8"
           >
             {[
               {
@@ -476,7 +476,7 @@ export default function Home() {
               </motion.a>
             </motion.div>
           </motion.div>
-    </div>
+        </div>
       </motion.section>
 
       <ProcessSection />
