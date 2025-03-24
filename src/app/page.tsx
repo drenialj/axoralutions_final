@@ -8,7 +8,7 @@ import ProcessSection from "@/components/sections/ProcessSection";
 export default function Home() {
   const [currentWordIndex, setCurrentWordIndex] = useState(0);
   const [prefersReducedMotion, setPrefersReducedMotion] = useState(false);
-  const words = ['KI-LÖSUNGEN', 'AUTOMATISIERUNG', 'INNOVATION'];
+  const words = ['AI-SOLUTIONS', 'AUTOMATISIERUNG', 'INNOVATION'];
 
   useEffect(() => {
     const interval = setInterval(() => {
@@ -122,7 +122,7 @@ export default function Home() {
                   exit={{ opacity: 0, y: -20 }}
                   transition={{ duration: 0.3, ease: "easeInOut" }}
                   className={`block bg-gradient-to-r from-purple-400 via-fuchsia-500 to-indigo-500 bg-clip-text text-transparent ${
-                    words[currentWordIndex] === 'KI-LÖSUNGEN' ? 'text-3xl sm:text-4xl md:text-6xl' : ''
+                    words[currentWordIndex] === 'AI-SOLUTIONS' ? 'text-3xl sm:text-4xl md:text-6xl' : ''
                   }`}
                 >
                   {words[currentWordIndex]}
