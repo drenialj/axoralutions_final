@@ -121,9 +121,7 @@ export default function Home() {
                   animate={{ opacity: 1, y: 0 }}
                   exit={{ opacity: 0, y: -20 }}
                   transition={{ duration: 0.3, ease: "easeInOut" }}
-                  className={`block bg-gradient-to-r from-purple-400 via-fuchsia-500 to-indigo-500 bg-clip-text text-transparent ${
-                    words[currentWordIndex] === 'AI-SOLUTIONS' ? 'text-3xl sm:text-4xl md:text-6xl' : ''
-                  }`}
+                  className="block bg-gradient-to-r from-purple-400 via-fuchsia-500 to-indigo-500 bg-clip-text text-transparent"
                 >
                   {words[currentWordIndex]}
                 </motion.span>
