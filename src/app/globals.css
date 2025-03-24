@@ -1,15 +1,10 @@
-@import "tailwindcss";
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
 
 :root {
   --background: #ffffff;
   --foreground: #171717;
-}
-
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
 }
 
 @media (prefers-color-scheme: dark) {
@@ -23,4 +18,115 @@ body {
   background: var(--background);
   color: var(--foreground);
   font-family: Arial, Helvetica, sans-serif;
+}
+
+@layer base {
+  :root {
+    --container-padding: 0.75rem;
+  }
+  
+  @screen sm {
+    :root {
+      --container-padding: 1rem;
+    }
+  }
+  
+  @screen lg {
+    :root {
+      --container-padding: 1.5rem;
+    }
+  }
+}
+
+@layer components {
+  .container {
+    @apply mx-auto px-3 sm:px-4 lg:px-6;
+    max-width: min(100% - 1.5rem, 1280px);
+  }
+
+  .section {
+    @apply py-8 sm:py-12 lg:py-16;
+  }
+
+  .section-sm {
+    @apply py-6 sm:py-8 lg:py-12;
+  }
+}
+
+/* Smooth scrolling */
+html {
+  scroll-behavior: smooth;
+}
+
+/* Prevent content shift when scrollbar appears */
+html {
+  scrollbar-gutter: stable;
+}
+
+/* Basic responsive text sizes */
+h1 {
+  @apply text-2xl sm:text-3xl lg:text-4xl font-bold;
+}
+
+h2 {
+  @apply text-xl sm:text-2xl lg:text-3xl font-bold;
+}
+
+h3 {
+  @apply text-lg sm:text-xl lg:text-2xl font-bold;
+}
+
+h4 {
+  @apply text-base sm:text-lg font-bold;
+}
+
+p {
+  @apply text-sm sm:text-base;
+}
+
+/* Responsive grid gaps */
+.grid-gap {
+  @apply gap-3 sm:gap-4 lg:gap-6;
+}
+
+/* Responsive padding */
+.section-padding {
+  @apply px-3 sm:px-4 lg:px-6;
+}
+
+/* Responsive margins */
+.section-margin {
+  @apply my-6 sm:my-8 lg:my-12;
+}
+
+/* Responsive container widths */
+.content-narrow {
+  @apply max-w-xl mx-auto;
+}
+
+.content-medium {
+  @apply max-w-3xl mx-auto;
+}
+
+.content-wide {
+  @apply max-w-5xl mx-auto;
+}
+
+/* Responsive images */
+.responsive-image {
+  @apply w-full h-auto object-cover;
+}
+
+/* Responsive buttons */
+.btn {
+  @apply px-3 py-1.5 sm:px-4 sm:py-2 rounded-lg text-sm font-medium transition-all duration-200;
+}
+
+.btn-primary {
+  @apply bg-gradient-to-r from-violet-500 to-fuchsia-500 text-white hover:from-violet-600 hover:to-fuchsia-600;
+}
+
+/* Responsive cards */
+.card {
+  @apply p-3 sm:p-4 lg:p-6 rounded-xl bg-white/5 backdrop-blur-sm;
 }
