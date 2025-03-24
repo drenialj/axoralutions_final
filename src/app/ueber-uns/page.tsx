@@ -13,11 +13,7 @@ export default function AboutUs() {
 
   const staggerChildren = {
     initial: { opacity: 0 },
-    whileInView: { opacity: 1 },
-    viewport: { once: true },
-    transition: {
-      staggerChildren: 0.2
-    }
+    whileInView: { opacity: 1 }
   };
 
   return (
@@ -100,6 +96,7 @@ export default function AboutUs() {
               initial="initial"
               whileInView="whileInView"
               viewport={{ once: true }}
+              transition={{ staggerChildren: 0.1 }}
               className="max-w-3xl mx-auto"
             >
               <div className="bg-white/5 backdrop-blur-sm rounded-xl p-8">
@@ -159,6 +156,7 @@ export default function AboutUs() {
               initial="initial"
               whileInView="whileInView"
               viewport={{ once: true }}
+              transition={{ staggerChildren: 0.1 }}
               className="grid grid-cols-1 md:grid-cols-3 gap-8"
             >
               {[
@@ -218,6 +216,7 @@ export default function AboutUs() {
             initial="initial"
             whileInView="whileInView"
             viewport={{ once: true }}
+            transition={{ staggerChildren: 0.1 }}
             className="grid grid-cols-1 md:grid-cols-2 gap-8"
           >
             {[
