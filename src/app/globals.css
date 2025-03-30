@@ -130,3 +130,37 @@ p {
 .card {
   @apply p-3 sm:p-4 lg:p-6 rounded-xl bg-white/5 backdrop-blur-sm;
 }
+
+/* Chat Message Styles */
+.chat-message {
+  @apply whitespace-pre-wrap;
+}
+
+.chat-message ul {
+  @apply pl-5 mb-2;
+}
+
+.chat-message li {
+  @apply mb-1 relative;
+}
+
+.chat-message li::before {
+  content: "•";
+  @apply absolute -left-4 text-purple-400;
+}
+
+.chat-message strong {
+  @apply font-bold text-white;
+}
+
+.chat-message p {
+  @apply mb-2;
+}
+
+.chat-message p:last-child {
+  @apply mb-0;
+}
+
+.chat-message br {
+  @apply my-2;
+}

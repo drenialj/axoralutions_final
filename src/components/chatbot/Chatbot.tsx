@@ -3,10 +3,17 @@
 import { useState, useRef, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { MessageSquare, X, Send } from 'lucide-react';
+import { marked } from 'marked';
 
 // Hilfsfunktion zum Formatieren der Nachrichten
 const formatMessage = (text: string) => {
-  return text.replace(/\n\n/g, '<br><br>').replace(/\n/g, '<br>');
+  // Ersetze **text** mit <strong>text</strong>
+  return text.replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>');
+};
+
+// Hilfsfunktion zum Escapen von Markdown-Zeichen
+const escapeMdChars = (text: string) => {
+  return text.replace(/\*/g, '\\*').replace(/_/g, '\\_');
 };
 
 interface Message {
@@ -22,6 +29,14 @@ export default function Chatbot() {
   const [inputMessage, setInputMessage] = useState('');
   const [isLoading, setIsLoading] = useState(false);
   const messagesEndRef = useRef<HTMLDivElement>(null);
+
+  // Konfiguriere marked für sicheres Parsing
+  useEffect(() => {
+    marked.setOptions({
+      breaks: true,    // Aktiviert \n als Zeilenumbruch
+      gfm: true,       // GitHub Flavored Markdown
+    });
+  }, []);
 
   const scrollToBottom = () => {
     messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
@@ -73,7 +88,7 @@ export default function Chatbot() {
       if (contentType && contentType.includes("application/json")) {
         const data = await res.json();
         if (data && typeof data.text === 'string') {
-          responseText = data.text;
+          responseText = escapeMdChars(data.text);
         } else {
           console.error("Ungültige JSON-Struktur:", data);
           throw new Error("Ungültige Antwortstruktur vom Server");
@@ -169,7 +184,12 @@ export default function Chatbot() {
                         : 'bg-white/5 text-gray-300'
                     }`}
                   >
-                    <p className="text-sm whitespace-pre-wrap">{message.text}</p>
+                    <div 
+                      className="text-sm chat-message"
+                      dangerouslySetInnerHTML={{ 
+                        __html: marked(message.text) 
+                      }}
+                    />
                     <span className="text-xs opacity-70 mt-1 block">
                       {message.timestamp.toLocaleTimeString()}
                     </span>
