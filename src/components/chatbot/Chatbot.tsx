@@ -4,6 +4,11 @@ import { useState, useRef, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { MessageSquare, X, Send } from 'lucide-react';
 
+// Hilfsfunktion zum Formatieren der Nachrichten
+const formatMessage = (text: string) => {
+  return text.replace(/\n\n/g, '<br><br>').replace(/\n/g, '<br>');
+};
+
 interface Message {
   id: string;
   text: string;
@@ -67,25 +72,11 @@ export default function Chatbot() {
         throw new Error(`Server-Fehler: ${res.status} ${res.statusText}`);
       }
 
-      // Direkt als JSON parsen für bessere Performance
-      const data = await res.json().catch(() => null);
+      const data = await res.json();
       
-      if (!data) {
-        throw new Error('Leere oder ungültige Antwort vom Server');
-      }
-
-      let responseText;
-      if (typeof data === 'string') {
-        responseText = data;
-      } else if (data && typeof data === 'object') {
-        responseText = data.response || data.data?.response || JSON.stringify(data);
-      } else {
-        throw new Error('Unerwartetes Antwortformat');
-      }
-
       const botMessage: Message = {
         id: (Date.now() + 1).toString(),
-        text: responseText,
+        text: data.text,
         sender: 'bot',
         timestamp: new Date(),
       };
@@ -165,7 +156,7 @@ export default function Chatbot() {
                         : 'bg-white/5 text-gray-300'
                     }`}
                   >
-                    <p className="text-sm">{message.text}</p>
+                    <p className="text-sm whitespace-pre-wrap">{message.text}</p>
                     <span className="text-xs opacity-70 mt-1 block">
                       {message.timestamp.toLocaleTimeString()}
                     </span>
