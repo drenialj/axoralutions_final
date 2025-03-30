@@ -41,31 +41,57 @@ export default function Chatbot() {
     setIsLoading(true);
 
     try {
+      console.log('Sende Anfrage an Server...');
+      const controller = new AbortController();
+      const timeoutId = setTimeout(() => controller.abort(), 30000); // 30 Sekunden Timeout
+
       const res = await fetch("https://drenialj.app.n8n.cloud/webhook-test/chatbot", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
+          "Accept": "application/json",
+          "Cache-Control": "no-cache"
         },
-        body: JSON.stringify({ message: inputMessage }),
+        body: JSON.stringify({ 
+          message: inputMessage.trim(),
+          timestamp: Date.now()
+        }),
+        signal: controller.signal,
+        keepalive: true
       });
 
+      clearTimeout(timeoutId);
+
       if (!res.ok) {
-        throw new Error('Netzwerk-Antwort war nicht ok');
+        console.error('Server-Fehler:', res.status, res.statusText);
+        throw new Error(`Server-Fehler: ${res.status} ${res.statusText}`);
       }
 
-      const data = await res.json();
+      // Direkt als JSON parsen für bessere Performance
+      const data = await res.json().catch(() => null);
       
-      // Bot-Antwort hinzufügen
+      if (!data) {
+        throw new Error('Leere oder ungültige Antwort vom Server');
+      }
+
+      let responseText;
+      if (typeof data === 'string') {
+        responseText = data;
+      } else if (data && typeof data === 'object') {
+        responseText = data.response || data.data?.response || JSON.stringify(data);
+      } else {
+        throw new Error('Unerwartetes Antwortformat');
+      }
+
       const botMessage: Message = {
         id: (Date.now() + 1).toString(),
-        text: data.response || 'Entschuldigung, ich konnte keine Antwort generieren.',
+        text: responseText,
         sender: 'bot',
         timestamp: new Date(),
       };
       setMessages(prev => [...prev, botMessage]);
     } catch (error) {
       console.error('Fehler beim Senden der Nachricht:', error);
-      // Fehlermeldung hinzufügen
       const errorMessage: Message = {
         id: (Date.now() + 1).toString(),
         text: 'Entschuldigung, es gab einen Fehler bei der Verarbeitung Ihrer Nachricht.',
