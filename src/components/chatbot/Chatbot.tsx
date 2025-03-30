@@ -48,7 +48,7 @@ export default function Chatbot() {
     try {
       console.log('Sende Anfrage an Server...');
       const controller = new AbortController();
-      const timeoutId = setTimeout(() => controller.abort(), 30000); // 30 Sekunden Timeout
+      const timeoutId = setTimeout(() => controller.abort(), 30000);
 
       const res = await fetch("https://drenialj.app.n8n.cloud/webhook-test/chatbot", {
         method: "POST",
@@ -58,8 +58,7 @@ export default function Chatbot() {
           "Cache-Control": "no-cache"
         },
         body: JSON.stringify({ 
-          message: inputMessage.trim(),
-          timestamp: Date.now()
+          message: inputMessage.trim()
         }),
         signal: controller.signal,
         keepalive: true
@@ -67,25 +66,39 @@ export default function Chatbot() {
 
       clearTimeout(timeoutId);
 
-      if (!res.ok) {
-        console.error('Server-Fehler:', res.status, res.statusText);
-        throw new Error(`Server-Fehler: ${res.status} ${res.statusText}`);
+      // Prüfe Content-Type der Antwort
+      const contentType = res.headers.get("content-type");
+      let responseText: string;
+
+      if (contentType && contentType.includes("application/json")) {
+        const data = await res.json();
+        if (data && typeof data.text === 'string') {
+          responseText = data.text;
+        } else {
+          console.error("Ungültige JSON-Struktur:", data);
+          throw new Error("Ungültige Antwortstruktur vom Server");
+        }
+      } else {
+        const raw = await res.text();
+        console.warn("Nicht-JSON Antwort:", raw);
+        throw new Error("Server-Antwort war kein gültiges JSON");
       }
 
-      const data = await res.json();
-      
       const botMessage: Message = {
         id: (Date.now() + 1).toString(),
-        text: data.text,
+        text: responseText,
         sender: 'bot',
         timestamp: new Date(),
       };
       setMessages(prev => [...prev, botMessage]);
-    } catch (error) {
-      console.error('Fehler beim Senden der Nachricht:', error);
+
+    } catch (error: any) {
+      console.error("Fehler beim Senden der Nachricht:", error);
       const errorMessage: Message = {
         id: (Date.now() + 1).toString(),
-        text: 'Entschuldigung, es gab einen Fehler bei der Verarbeitung Ihrer Nachricht.',
+        text: error instanceof Error && error.message === "Failed to fetch" 
+          ? "⚠️ Netzwerkfehler beim Senden der Nachricht."
+          : "⚠️ " + (error.message || "Ein unerwarteter Fehler ist aufgetreten."),
         sender: 'bot',
         timestamp: new Date(),
       };
