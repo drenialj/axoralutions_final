@@ -11,11 +11,44 @@ export default function ContactPage() {
     company: '',
     message: ''
   });
+  const [showSuccessMessage, setShowSuccessMessage] = useState(false);
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    // Hier kommt die Logik für das Senden des Formulars
-    console.log('Form submitted:', formData);
+    setIsSubmitting(true);
+    try {
+      const response = await fetch('/api/contact', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(formData),
+      });
+
+      if (!response.ok) {
+        throw new Error('Fehler beim Senden der Nachricht');
+      }
+
+      // Formular zurücksetzen
+      setFormData({
+        name: '',
+        email: '',
+        company: '',
+        message: ''
+      });
+
+      // Erfolgsmeldung anzeigen
+      setShowSuccessMessage(true);
+      setTimeout(() => {
+        setShowSuccessMessage(false);
+      }, 5000); // Nachricht nach 5 Sekunden ausblenden
+    } catch (error) {
+      console.error('Fehler beim Senden:', error);
+      alert('Es ist ein Fehler aufgetreten. Bitte versuchen Sie es später erneut.');
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
@@ -29,8 +62,8 @@ export default function ContactPage() {
     {
       icon: <Mail className="w-6 h-6" />,
       title: 'E-Mail',
-      content: 'dreni.alj@gmail.com',
-      href: 'mailto:dreni.alj@gmail.com'
+      content: 'info@axoralutions.de',
+      href: 'mailto:info@axoralutions.de'
     },
     {
       icon: <Phone className="w-6 h-6" />,
@@ -155,10 +188,20 @@ export default function ContactPage() {
                     </div>
                     <button
                       type="submit"
-                      className="w-full flex items-center justify-center px-6 py-3 rounded-xl bg-gradient-to-r from-purple-500 to-indigo-500 text-white font-medium hover:from-purple-600 hover:to-indigo-600 transition-all duration-300"
+                      disabled={isSubmitting}
+                      className="w-full flex items-center justify-center px-6 py-3 rounded-xl bg-gradient-to-r from-purple-500 to-indigo-500 text-white font-medium hover:from-purple-600 hover:to-indigo-600 transition-all duration-300 disabled:opacity-70"
                     >
-                      Nachricht senden
-                      <Send className="w-4 h-4 ml-2" />
+                      {isSubmitting ? (
+                        <>
+                          <span className="mr-2">Wird gesendet</span>
+                          <div className="h-4 w-4 border-2 border-white border-t-transparent rounded-full animate-spin"></div>
+                        </>
+                      ) : (
+                        <>
+                          Nachricht senden
+                          <Send className="w-4 h-4 ml-2" />
+                        </>
+                      )}
                     </button>
                   </form>
                 </div>
@@ -230,6 +273,37 @@ export default function ContactPage() {
           </div>
         </div>
       </section>
+
+      {/* Erfolgs-Nachricht */}
+      {showSuccessMessage && (
+        <motion.div
+          initial={{ opacity: 0, y: -10 }}
+          animate={{ opacity: 1, y: 0 }}
+          exit={{ opacity: 0 }}
+          className="fixed inset-0 flex items-center justify-center z-50 px-4"
+        >
+          <div className="fixed inset-0 bg-black/50 backdrop-blur-sm" onClick={() => setShowSuccessMessage(false)}></div>
+          <div className="relative p-6 bg-gradient-to-br from-purple-900/90 to-black/90 backdrop-blur-xl rounded-2xl border border-purple-500/30 shadow-xl shadow-purple-500/10 max-w-md w-full">
+            <div className="flex items-center mb-4">
+              <div className="h-10 w-10 rounded-full bg-gradient-to-r from-green-400 to-emerald-500 flex items-center justify-center">
+                <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+                </svg>
+              </div>
+              <h3 className="ml-3 text-xl font-medium text-white">Vielen Dank!</h3>
+            </div>
+            <p className="text-gray-300 mb-5">
+              Vielen Dank für Ihre Nachricht! Wir werden uns in Kürze bei Ihnen melden.
+            </p>
+            <button
+              onClick={() => setShowSuccessMessage(false)}
+              className="w-full py-2.5 px-4 rounded-xl bg-white/10 text-white hover:bg-white/20 transition duration-300"
+            >
+              Schließen
+            </button>
+          </div>
+        </motion.div>
+      )}
     </div>
   );
 } 

@@ -54,7 +54,7 @@ export default function RootLayout({
                 <h4 className="text-sm font-medium text-gray-300">Kontakt</h4>
                 <ul className="space-y-1.5">
                   <li className="text-gray-400 text-sm">info@axoralutions.de</li>
-                  <li className="text-gray-400 text-sm">+49 123 456789</li>
+                  <li className="text-gray-400 text-sm">+49 176 42624008</li>
                   <li className="text-gray-400 text-sm">Mannheim, Deutschland</li>
                 </ul>
               </div>
@@ -65,11 +65,11 @@ export default function RootLayout({
                   © 2024 Axoralutions – Alle Rechte vorbehalten
                 </div>
                 <div className="flex space-x-4">
-                  <a href="https://linkedin.com" target="_blank" rel="noopener noreferrer" className="text-gray-400 hover:text-white text-sm transition-colors">
+                  <a href="https://www.linkedin.com/in/dreni-aliji-b827a7291/" target="_blank" rel="noopener noreferrer" className="text-gray-400 hover:text-white text-sm transition-colors">
                     LinkedIn
                   </a>
-                  <a href="https://github.com" target="_blank" rel="noopener noreferrer" className="text-gray-400 hover:text-white text-sm transition-colors">
-                    GitHub
+                  <a href="https://www.instagram.com/drenalj/" target="_blank" rel="noopener noreferrer" className="text-gray-400 hover:text-white text-sm transition-colors">
+                    Instagram
                   </a>
                 </div>
               </div>
