@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
 import Navbar from "@/components/navigation/Navbar";
+import Chatbot from '@/components/chatbot/Chatbot';
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -19,6 +20,7 @@ export default function RootLayout({
     <html lang="de" className="scroll-smooth">
       <body className={`${inter.className} bg-[#0c0c0d] text-white min-w-[320px] overflow-x-hidden`}>
         <Navbar />
+        <Chatbot />
         <main className="min-h-screen pt-16 sm:pt-20">
           {children}
         </main>
