@@ -1,0 +1,5 @@
+﻿{
+  "Description": "Überprüfungsdatei für Domänen-Eigentümerschaft für Microsoft 365-Position im Website-Root",
+  "Domain": "axoralutions.de",
+  "Id": "79f25754-9d9a-4314-b882-08fdc30f1ea0"
+}
