@@ -86,7 +86,7 @@ export default function Navbar() {
                 />
               </div>
               <span className="text-3xl font-bold bg-gradient-to-r from-purple-400 via-fuchsia-500 to-indigo-500 bg-clip-text text-transparent flex items-baseline">
-                <span className="font-cursive text-4xl mr-0">Axora</span>
+                <span className="font-cursive text-4xl mr-0">xora</span>
                 <span className="font-cursive text-4xl">l</span>
                 <span className="text-2xl">utions</span>
               </span>
