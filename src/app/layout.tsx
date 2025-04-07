@@ -9,15 +9,16 @@ const inter = Inter({ subsets: ["latin"] });
 export const metadata: Metadata = {
   title: "Axoralutions - KI-Lösungen für Ihr Unternehmen",
   description: "Digitale Innovation aus Mannheim. Wir entwickeln KI-Lösungen für Unternehmen, die ihre Prozesse optimieren und digitalisieren möchten.",
-  icons: {
-    icon: [
-      {
-        url: '/logo.png',
-        sizes: '50x50',
-        type: 'image/png',
-      }
-    ],
-  },
+  icons: [
+    {
+      rel: 'icon',
+      url: '/logo.png',
+    },
+    {
+      rel: 'apple-touch-icon',
+      url: '/logo.png',
+    }
+  ]
 };
 
 export default function RootLayout({
@@ -27,9 +28,6 @@ export default function RootLayout({
 }) {
   return (
     <html lang="de" className="scroll-smooth">
-      <head>
-        <link rel="icon" type="image/png" href="/logo.png" />
-      </head>
       <body className={`${inter.className} bg-[#0c0c0d] text-white min-w-[320px] overflow-x-hidden`}>
         <Navbar />
         <Chatbot />
