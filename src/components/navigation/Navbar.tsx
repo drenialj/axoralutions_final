@@ -72,26 +72,29 @@ export default function Navbar() {
       isScrolled ? 'bg-black/50 backdrop-blur-lg' : 'bg-transparent'
     }`}>
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex justify-between items-center h-16">
+        <div className="flex justify-between items-center h-20">
           <div className="flex items-center">
             <Link href="/" className="flex items-center">
-              <div className="relative w-12 h-12 mr-2">
+              <div className="relative w-16 h-16 mr-3">
                 <Image
                   src="/logo.png"
                   alt="Axoralutions Logo"
-                  fill
-                  className="object-contain"
+                  width={64}
+                  height={64}
+                  className="object-contain brightness-125"
                   priority
                 />
               </div>
-              <span className="text-2xl font-bold bg-gradient-to-r from-purple-400 via-fuchsia-500 to-indigo-500 bg-clip-text text-transparent font-cursive">
-                Axoralutions
+              <span className="text-3xl font-bold bg-gradient-to-r from-purple-400 via-fuchsia-500 to-indigo-500 bg-clip-text text-transparent flex items-baseline">
+                <span className="font-cursive text-4xl mr-0">Axora</span>
+                <span className="font-cursive text-4xl">l</span>
+                <span className="text-2xl">utions</span>
               </span>
             </Link>
           </div>
 
           {/* Desktop Navigation */}
-          <nav className="hidden md:flex items-center space-x-8">
+          <nav className="hidden md:flex items-center space-x-10">
             {navigation.map((item) => (
               <div
                 key={item.name}
@@ -101,7 +104,7 @@ export default function Navbar() {
               >
                 <Link
                   href={item.href}
-                  className="inline-flex items-center text-gray-300 hover:text-white text-sm font-medium relative group"
+                  className="inline-flex items-center text-gray-300 hover:text-white text-base font-medium relative group"
                 >
                   {item.name}
                   {item.hasDropdown && (
