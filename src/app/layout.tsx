@@ -27,6 +27,9 @@ export default function RootLayout({
 }) {
   return (
     <html lang="de" className="scroll-smooth">
+      <head>
+        <link rel="icon" type="image/png" href="/logo.png" />
+      </head>
       <body className={`${inter.className} bg-[#0c0c0d] text-white min-w-[320px] overflow-x-hidden`}>
         <Navbar />
         <Chatbot />
