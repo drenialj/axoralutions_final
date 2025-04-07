@@ -10,9 +10,13 @@ export const metadata: Metadata = {
   title: "Axoralutions - KI-Lösungen für Ihr Unternehmen",
   description: "Digitale Innovation aus Mannheim. Wir entwickeln KI-Lösungen für Unternehmen, die ihre Prozesse optimieren und digitalisieren möchten.",
   icons: {
-    icon: '/logo.png',
-    shortcut: '/logo.png',
-    apple: '/logo.png',
+    icon: [
+      {
+        url: '/logo.png',
+        sizes: '50x50',
+        type: 'image/png',
+      }
+    ],
   },
 };
 
