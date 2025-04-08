@@ -13,23 +13,20 @@ export async function POST(request: Request) {
       );
     }
 
-    // E-Mail-Transport konfigurieren
+    // Gmail SMTP-Transport konfigurieren
     const transporter = nodemailer.createTransport({
-      host: process.env.SMTP_HOST,
-      port: Number(process.env.SMTP_PORT),
-      secure: true, // SSL/TLS
+      host: 'smtp.gmail.com',
+      port: 587,
+      secure: false,
       auth: {
-        user: process.env.SMTP_USER,
-        pass: process.env.SMTP_PASS,
-      },
-      tls: {
-        rejectUnauthorized: false // Für selbstsignierte Zertifikate
+        user: 'dreni.aliji@axoralutions.de',
+        pass: 'Dreni2006'
       }
     });
 
     // E-Mail-Nachricht erstellen
     const mailOptions = {
-      from: process.env.SMTP_USER,
+      from: 'dreni.aliji@axoralutions.de',
       to: 'dreni.aliji@axoralutions.de',
       subject: `Neue Kontaktanfrage von ${name}`,
       text: `
