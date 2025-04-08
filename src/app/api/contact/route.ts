@@ -13,47 +13,51 @@ export async function POST(request: Request) {
       );
     }
 
-    // E-Mail-Text formatieren
-    const emailText = `
-      Neue Kontaktanfrage:
-      
-      Name: ${name}
-      E-Mail: ${email}
-      Unternehmen: ${company || 'Nicht angegeben'}
-      
-      Nachricht:
-      ${message}
-    `;
-
-    // Transporter für Gmail konfigurieren
+    // E-Mail-Transport konfigurieren
     const transporter = nodemailer.createTransport({
-      service: 'gmail',
+      host: process.env.SMTP_HOST,
+      port: Number(process.env.SMTP_PORT),
+      secure: true, // SSL/TLS
       auth: {
-        user: process.env.GMAIL_USER,
-        pass: process.env.GMAIL_APP_PASSWORD,
+        user: process.env.SMTP_USER,
+        pass: process.env.SMTP_PASS,
       },
+      tls: {
+        rejectUnauthorized: false // Für selbstsignierte Zertifikate
+      }
     });
 
-    // E-Mail-Optionen
+    // E-Mail-Nachricht erstellen
     const mailOptions = {
-      from: process.env.GMAIL_USER,
+      from: process.env.SMTP_USER,
       to: 'dreni.aliji@axoralutions.de',
       subject: `Neue Kontaktanfrage von ${name}`,
-      text: emailText,
-      replyTo: email,
+      text: `
+        Name: ${name}
+        E-Mail: ${email}
+        Unternehmen: ${company}
+        
+        Nachricht:
+        ${message}
+      `,
+      html: `
+        <h2>Neue Kontaktanfrage</h2>
+        <p><strong>Name:</strong> ${name}</p>
+        <p><strong>E-Mail:</strong> ${email}</p>
+        <p><strong>Unternehmen:</strong> ${company}</p>
+        <p><strong>Nachricht:</strong></p>
+        <p>${message.replace(/\n/g, '<br>')}</p>
+      `,
     };
 
     // E-Mail senden
     await transporter.sendMail(mailOptions);
 
-    return NextResponse.json(
-      { message: 'Nachricht erfolgreich gesendet' },
-      { status: 200 }
-    );
+    return NextResponse.json({ success: true });
   } catch (error) {
     console.error('Fehler beim Senden der E-Mail:', error);
     return NextResponse.json(
-      { error: 'Es ist ein Fehler aufgetreten. Bitte versuchen Sie es später erneut.' },
+      { error: 'Interner Server-Fehler' },
       { status: 500 }
     );
   }
