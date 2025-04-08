@@ -18,9 +18,13 @@ export async function POST(request: Request) {
       host: 'smtp.gmail.com',
       port: 587,
       secure: false,
+      requireTLS: true,
       auth: {
         user: 'dreni.aliji@axoralutions.de',
         pass: 'Dreni2006'
+      },
+      tls: {
+        minVersion: 'TLSv1.2'
       }
     });
 
