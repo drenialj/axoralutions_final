@@ -65,7 +65,7 @@ export default function RootLayout({
               <div className="space-y-3">
                 <h4 className="text-sm font-medium text-gray-300">Kontakt</h4>
                 <ul className="space-y-1.5">
-                  <li className="text-gray-400 text-sm">info@axoralutions.de</li>
+                  <li className="text-gray-400 text-sm">dreni.aliji@axoralutions.de</li>
                   <li className="text-gray-400 text-sm">+49 176 42624008</li>
                   <li className="text-gray-400 text-sm">Mannheim, Deutschland</li>
                 </ul>

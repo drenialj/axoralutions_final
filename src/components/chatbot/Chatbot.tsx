@@ -65,7 +65,7 @@ export default function Chatbot() {
       const controller = new AbortController();
       const timeoutId = setTimeout(() => controller.abort(), 30000);
 
-      const res = await fetch("https://drenialj.app.n8n.cloud/webhook/43b61897-122d-4f07-9796-42948b6794f3", {
+      const res = await fetch("https://drenialj.app.n8n.cloud/webhook-test/43b61897-122d-4f07-9796-42948b6794f3", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

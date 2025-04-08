@@ -62,8 +62,8 @@ export default function ContactPage() {
     {
       icon: <Mail className="w-6 h-6" />,
       title: 'E-Mail',
-      content: 'info@axoralutions.de',
-      href: 'mailto:info@axoralutions.de'
+      content: 'dreni.aliji@axoralutions.de',
+      href: 'mailto:dreni.aliji@axoralutions.de'
     },
     {
       icon: <Phone className="w-6 h-6" />,
@@ -153,7 +153,7 @@ export default function ContactPage() {
                         value={formData.email}
                         onChange={handleChange}
                         className="w-full px-4 py-3 bg-white/5 border border-white/10 rounded-xl text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-transparent"
-                        placeholder="ihre@email.de"
+                        placeholder="dreni.aliji@axoralutions.de"
                         required
                       />
                     </div>

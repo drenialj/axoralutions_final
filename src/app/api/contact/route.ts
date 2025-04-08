@@ -22,7 +22,7 @@ export async function POST(request: Request) {
     // E-Mail-Nachricht erstellen
     const mailOptions = {
       from: process.env.SMTP_USER,
-      to: 'info@axoralutions.de',
+      to: 'dreni.aliji@axoralutions.de',
       subject: `Neue Kontaktanfrage von ${name}`,
       text: `
         Name: ${name}
