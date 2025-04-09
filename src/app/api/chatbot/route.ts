@@ -41,8 +41,11 @@ export async function POST(req: Request) {
 
     // Antwort von n8n verarbeiten
     const responseData = await n8nResponse.json();
-
-    return NextResponse.json(responseData, { status: 200 });
+    
+    // Formatiere die Antwort im erwarteten Format
+    return NextResponse.json({
+      text: responseData.output || responseData.message || responseData,
+    }, { status: 200 });
   } catch (error) {
     console.error('Fehler beim Verarbeiten der Chatbot-Anfrage:', error);
     return NextResponse.json(
