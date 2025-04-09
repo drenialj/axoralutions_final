@@ -65,7 +65,8 @@ export default function Chatbot() {
       const controller = new AbortController();
       const timeoutId = setTimeout(() => controller.abort(), 30000);
 
-      const res = await fetch("https://drenialj.app.n8n.cloud/webhook-test/43b61897-122d-4f07-9796-42948b6794f3", {
+      // Verwende die lokale API-Route statt direktem n8n-Aufruf
+      const res = await fetch("/api/chatbot", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -107,13 +108,13 @@ export default function Chatbot() {
       };
       setMessages(prev => [...prev, botMessage]);
 
-    } catch (error: any) {
+    } catch (error: unknown) {
       console.error("Fehler beim Senden der Nachricht:", error);
       const errorMessage: Message = {
         id: (Date.now() + 1).toString(),
         text: error instanceof Error && error.message === "Failed to fetch" 
           ? "⚠️ Netzwerkfehler beim Senden der Nachricht."
-          : "⚠️ " + (error.message || "Ein unerwarteter Fehler ist aufgetreten."),
+          : "⚠️ " + (error instanceof Error ? error.message : "Ein unerwarteter Fehler ist aufgetreten."),
         sender: 'bot',
         timestamp: new Date(),
       };
