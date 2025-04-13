@@ -28,38 +28,38 @@ export default function Navbar() {
         { 
           name: 'KI-Beratung', 
           href: '/leistungen/ki-beratung', 
-          description: 'Strategische Beratung für KI-Implementierungen' 
+          description: 'Strategische Beratung für erfolgreiche KI-Implementierung' 
         },
         { 
-          name: 'Custom AI Solutions', 
-          href: '/leistungen/custom-ai', 
-          description: 'Maßgeschneiderte KI-Lösungen' 
+          name: 'KI-Automatisierung', 
+          href: '/leistungen/ki-automatisierung', 
+          description: 'Intelligente Prozessautomatisierung mit KI' 
         },
         { 
-          name: 'Prozessautomatisierung', 
-          href: '/leistungen/automatisierung', 
-          description: 'Intelligente Automatisierung mit KI' 
+          name: 'SaaS-Lösungen', 
+          href: '/leistungen/saas-loesungen', 
+          description: 'Skalierbare Cloud-Software mit KI-Integration' 
         },
         { 
-          name: 'SaaS & IT-Entwicklung', 
-          href: '/leistungen/saas-entwicklung', 
-          description: 'Cloud-basierte Softwarelösungen' 
+          name: 'Individuelle KI-Lösungen', 
+          href: '/leistungen/individuelle-ki', 
+          description: 'Maßgeschneiderte KI-Entwicklung für Ihre Anforderungen' 
         }
       ]
     },
     { 
-      name: 'Company', 
-      href: '/company', 
+      name: 'Über uns', 
+      href: '/ueber-uns', 
       hasDropdown: true,
       dropdownItems: [
         {
-          name: 'Über uns',
-          href: '/company/ueber-uns',
-          description: 'Lernen Sie Axoralutions kennen'
+          name: 'Unternehmen',
+          href: '/ueber-uns/unternehmen',
+          description: 'Lernen Sie Axora Solutions kennen'
         },
         {
           name: 'Werte & Kultur',
-          href: '/company/werte-kultur',
+          href: '/ueber-uns/werte-kultur',
           description: 'Unsere Grundwerte und Arbeitsweise'
         }
       ]
@@ -78,7 +78,7 @@ export default function Navbar() {
               <div className="relative w-16 h-16 mr-3">
                 <Image
                   src="/logo.png"
-                  alt="Axoralutions Logo"
+                  alt="xoralutions Logo"
                   width={64}
                   height={64}
                   className="object-contain brightness-125"
