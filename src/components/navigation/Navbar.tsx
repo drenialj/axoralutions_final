@@ -4,6 +4,7 @@ import { useState, useEffect } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
 import { Menu, X, ChevronDown } from 'lucide-react';
+import { motion, AnimatePresence } from 'framer-motion';
 
 export default function Navbar() {
   const [isScrolled, setIsScrolled] = useState(false);
@@ -17,6 +18,18 @@ export default function Navbar() {
     window.addEventListener('scroll', handleScroll);
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
+
+  // Verhindere Scrollen wenn Mobile Menü offen ist
+  useEffect(() => {
+    if (mobileMenuOpen) {
+      document.body.style.overflow = 'hidden';
+    } else {
+      document.body.style.overflow = 'unset';
+    }
+    return () => {
+      document.body.style.overflow = 'unset';
+    };
+  }, [mobileMenuOpen]);
 
   const navigation = [
     { name: 'Home', href: '/' },
@@ -69,26 +82,25 @@ export default function Navbar() {
 
   return (
     <nav className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
-      isScrolled ? 'bg-black/50 backdrop-blur-lg' : 'bg-transparent'
+      isScrolled || mobileMenuOpen ? 'bg-black/95 backdrop-blur-lg' : 'bg-transparent'
     }`}>
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex justify-between items-center h-20">
+        <div className="flex justify-between items-center h-16 md:h-20">
           <div className="flex items-center">
-            <Link href="/" className="flex items-center">
-              <div className="relative w-16 h-16 mr-3">
+            <Link href="/" className="flex items-center" onClick={() => setMobileMenuOpen(false)}>
+              <div className="relative w-12 h-12 md:w-16 md:h-16 mr-2 md:mr-3">
                 <Image
                   src="/logo.png"
                   alt="xoralutions Logo"
-                  width={64}
-                  height={64}
+                  fill
                   className="object-contain brightness-125"
                   priority
                 />
               </div>
-              <span className="text-3xl font-bold bg-gradient-to-r from-purple-400 via-fuchsia-500 to-indigo-500 bg-clip-text text-transparent flex items-baseline">
-                <span className="font-cursive text-4xl mr-0">xora</span>
-                <span className="font-cursive text-4xl">l</span>
-                <span className="text-2xl">utions</span>
+              <span className="text-2xl md:text-3xl font-bold bg-gradient-to-r from-purple-400 via-fuchsia-500 to-indigo-500 bg-clip-text text-transparent flex items-baseline">
+                <span className="font-cursive text-3xl md:text-4xl mr-0">xora</span>
+                <span className="font-cursive text-3xl md:text-4xl">l</span>
+                <span className="text-xl md:text-2xl">utions</span>
               </span>
             </Link>
           </div>
@@ -99,8 +111,8 @@ export default function Navbar() {
               <div
                 key={item.name}
                 className="relative"
-                onMouseEnter={() => setActiveDropdown(item.name)}
-                onMouseLeave={() => setActiveDropdown(null)}
+                onMouseEnter={() => item.hasDropdown && setActiveDropdown(item.name)}
+                onMouseLeave={() => item.hasDropdown && setActiveDropdown(null)}
               >
                 <Link
                   href={item.href}
@@ -115,9 +127,9 @@ export default function Navbar() {
                   <span className="absolute -bottom-1 left-0 w-full h-0.5 bg-gradient-to-r from-violet-500 to-fuchsia-500 scale-x-0 group-hover:scale-x-100 transition-transform duration-200" />
                 </Link>
 
-                {/* Dropdown Panel */}
+                {/* Desktop Dropdown */}
                 {item.hasDropdown && activeDropdown === item.name && (
-                  <div className="absolute top-full left-1/2 -translate-x-1/2 pt-2">
+                  <div className="absolute top-full left-1/2 -translate-x-1/2 pt-2 z-50">
                     <div className="bg-black/95 backdrop-blur-md rounded-xl border border-white/10 shadow-2xl p-2 min-w-[240px]">
                       <div className="space-y-0.5">
                         {item.dropdownItems?.map((dropdownItem) => (
@@ -125,6 +137,7 @@ export default function Navbar() {
                             key={dropdownItem.name}
                             href={dropdownItem.href}
                             className="block p-2 rounded-lg hover:bg-white/5 transition-all duration-200 group/item"
+                            onClick={() => setActiveDropdown(null)}
                           >
                             <div className="text-gray-200 text-sm font-medium group-hover/item:text-violet-400 transition-colors">
                               {dropdownItem.name}
@@ -142,7 +155,7 @@ export default function Navbar() {
             ))}
           </nav>
 
-          {/* CTA Button */}
+          {/* Desktop CTA Button */}
           <div className="hidden md:block">
             <Link
               href="/kontakt"
@@ -155,7 +168,8 @@ export default function Navbar() {
           {/* Mobile menu button */}
           <button
             onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-            className="md:hidden p-2 text-gray-300 hover:text-white"
+            className="md:hidden p-2 text-gray-300 hover:text-white focus:outline-none"
+            aria-label="Menü öffnen"
           >
             {mobileMenuOpen ? (
               <X className="h-6 w-6" />
@@ -167,63 +181,79 @@ export default function Navbar() {
       </div>
 
       {/* Mobile menu */}
-      {mobileMenuOpen && (
-        <div className="md:hidden bg-black/80 backdrop-blur-lg">
-          <div className="px-4 py-4 space-y-4">
-            {navigation.map((item) => (
-              <div key={item.name} className="space-y-2">
-                <div className="flex items-center justify-between">
-                  <Link
-                    href={item.href}
-                    className="text-gray-300 hover:text-white text-sm font-medium"
-                    onClick={() => !item.hasDropdown && setMobileMenuOpen(false)}
+      <AnimatePresence>
+        {mobileMenuOpen && (
+          <motion.div
+            initial={{ opacity: 0, height: 0 }}
+            animate={{ opacity: 1, height: 'auto' }}
+            exit={{ opacity: 0, height: 0 }}
+            transition={{ duration: 0.2 }}
+            className="md:hidden fixed inset-x-0 top-16 bottom-0 bg-black/95 backdrop-blur-lg overflow-y-auto"
+          >
+            <div className="px-4 py-6 space-y-6">
+              {navigation.map((item) => (
+                <div key={item.name} className="space-y-3">
+                  <div 
+                    className="flex items-center justify-between"
+                    onClick={() => item.hasDropdown && setActiveDropdown(activeDropdown === item.name ? null : item.name)}
                   >
-                    {item.name}
-                  </Link>
-                  {item.hasDropdown && (
-                    <button
-                      onClick={() => setActiveDropdown(activeDropdown === item.name ? null : item.name)}
-                      className="p-1"
+                    <Link
+                      href={item.href}
+                      className="text-gray-300 hover:text-white text-lg font-medium"
+                      onClick={() => !item.hasDropdown && setMobileMenuOpen(false)}
                     >
-                      <ChevronDown className={`h-4 w-4 transition-transform duration-200 ${
+                      {item.name}
+                    </Link>
+                    {item.hasDropdown && (
+                      <ChevronDown className={`h-5 w-5 transition-transform duration-200 ${
                         activeDropdown === item.name ? 'rotate-180' : ''
                       }`} />
-                    </button>
-                  )}
-                </div>
-                
-                {/* Mobile Dropdown */}
-                {item.hasDropdown && activeDropdown === item.name && (
-                  <div className="pl-4 space-y-3 pt-2">
-                    {item.dropdownItems?.map((dropdownItem) => (
-                      <Link
-                        key={dropdownItem.name}
-                        href={dropdownItem.href}
-                        className="block"
-                        onClick={() => setMobileMenuOpen(false)}
-                      >
-                        <div className="text-white text-sm font-medium">
-                          {dropdownItem.name}
-                        </div>
-                        <div className="text-gray-400 text-xs mt-0.5">
-                          {dropdownItem.description}
-                        </div>
-                      </Link>
-                    ))}
+                    )}
                   </div>
-                )}
+                  
+                  {/* Mobile Dropdown */}
+                  <AnimatePresence>
+                    {item.hasDropdown && activeDropdown === item.name && (
+                      <motion.div
+                        initial={{ opacity: 0, height: 0 }}
+                        animate={{ opacity: 1, height: 'auto' }}
+                        exit={{ opacity: 0, height: 0 }}
+                        transition={{ duration: 0.2 }}
+                        className="pl-4 space-y-4"
+                      >
+                        {item.dropdownItems?.map((dropdownItem) => (
+                          <Link
+                            key={dropdownItem.name}
+                            href={dropdownItem.href}
+                            className="block py-2"
+                            onClick={() => setMobileMenuOpen(false)}
+                          >
+                            <div className="text-white text-base font-medium">
+                              {dropdownItem.name}
+                            </div>
+                            <div className="text-gray-400 text-sm mt-1">
+                              {dropdownItem.description}
+                            </div>
+                          </Link>
+                        ))}
+                      </motion.div>
+                    )}
+                  </AnimatePresence>
+                </div>
+              ))}
+              <div className="pt-4">
+                <Link
+                  href="/kontakt"
+                  className="block w-full text-center px-6 py-3 rounded-lg text-base font-medium text-white bg-gradient-to-r from-violet-500 to-fuchsia-500 hover:from-violet-600 hover:to-fuchsia-600 transition-all duration-200"
+                  onClick={() => setMobileMenuOpen(false)}
+                >
+                  Termin vereinbaren
+                </Link>
               </div>
-            ))}
-            <Link
-              href="/kontakt"
-              className="block w-full text-center px-4 py-2 rounded-lg text-sm font-medium text-white bg-gradient-to-r from-violet-500 to-fuchsia-500 hover:from-violet-600 hover:to-fuchsia-600 transition-all duration-200"
-              onClick={() => setMobileMenuOpen(false)}
-            >
-              Termin vereinbaren
-            </Link>
-          </div>
-        </div>
-      )}
+            </div>
+          </motion.div>
+        )}
+      </AnimatePresence>
     </nav>
   );
 } 

@@ -81,113 +81,75 @@ export default function Home() {
           className="absolute inset-0"
         >
           <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,_var(--tw-gradient-stops))] from-purple-500/10 via-transparent to-transparent"></div>
-          <div className="absolute inset-0 bg-[url('/grid.svg')] opacity-5"></div>
+          <div className="absolute inset-0 opacity-5 bg-[linear-gradient(to_right,#333_1px,transparent_1px),linear-gradient(to_bottom,#333_1px,transparent_1px)] bg-[size:24px_24px]"></div>
         </motion.div>
 
-        <div className="container mx-auto px-6 py-20 relative">
-          <div className="flex flex-col-reverse lg:flex-row items-center justify-between gap-16 lg:gap-24">
-            {/* Illustration - Now on the left */}
-            <motion.div
-              initial={{ opacity: 0, x: -20 }}
-              animate={{ opacity: 1, x: 0 }}
-              transition={{ delay: 0.6, duration: 0.8 }}
-              className="lg:w-1/2 flex justify-center items-center"
+        <div className="container mx-auto px-4 py-12 relative">
+          <div className="flex flex-col items-center justify-center text-center">
+            <motion.span
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.2, duration: 0.5, ease: "easeOut" }}
+              className="inline-block px-4 py-1.5 rounded-full bg-white/5 backdrop-blur-sm text-gray-300 mb-6 text-sm tracking-wider"
             >
-              <motion.div
-                className="relative w-[600px] h-[600px] flex items-center justify-center p-8"
-              >
-                <div className="absolute inset-0 bg-gradient-to-br from-purple-500/10 via-fuchsia-500/5 to-transparent rounded-3xl"></div>
-                <motion.img
-                  src="/images/A_digital_illustration_in_a_flat_and_modern_style_.png"
-                  alt="Roboter schüttelt Geschäftsfrau die Hand – symbolisiert KI-Kooperation"
-                  className="w-[500px] h-[500px] object-contain relative z-10"
-                  animate={{
-                    scale: [1, 1.02, 1],
-                  }}
-                  transition={{
-                    duration: 3,
-                    ease: "easeInOut",
-                    repeat: Infinity,
-                    repeatType: "reverse"
-                  }}
-                />
-              </motion.div>
-            </motion.div>
+              Digitale Innovation aus Mannheim
+            </motion.span>
 
-            {/* Text Content - Now on the right */}
-            <motion.div
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              transition={{ duration: 0.5 }}
-              className="lg:w-1/2 flex flex-col items-center lg:items-start text-center lg:text-left min-w-[500px]"
+            <motion.h1
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.3, duration: 0.5, ease: "easeOut" }}
+              className="text-3xl sm:text-4xl md:text-5xl lg:text-7xl font-light tracking-tight mb-4 leading-tight"
             >
-              <motion.span
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: 0.2, duration: 0.5, ease: "easeOut" }}
-                className="inline-block px-4 py-1.5 rounded-full bg-white/5 backdrop-blur-sm text-gray-300 mb-8 text-sm tracking-wider"
-              >
-                Digitale Innovation aus Mannheim
-              </motion.span>
-
-              <motion.h1
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: 0.3, duration: 0.5, ease: "easeOut" }}
-                className="text-4xl sm:text-5xl md:text-7xl font-light tracking-tight mb-6 leading-tight"
-              >
-                <span className="block text-white mb-4">Wir entwickeln</span>
-                <AnimatePresence mode="wait">
-                  <motion.span
-                    key={currentWordIndex}
-                    initial={{ opacity: 0, y: 20 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    exit={{ opacity: 0, y: -20 }}
-                    transition={{ duration: 0.5, ease: "easeInOut" }}
-                    className="block bg-gradient-to-r from-purple-400 to-pink-500 bg-clip-text text-transparent whitespace-nowrap"
-                  >
-                    {words[currentWordIndex]}
-                  </motion.span>
-                </AnimatePresence>
-              </motion.h1>
-
-              <motion.p
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: 0.4, duration: 0.5, ease: "easeOut" }}
-                className="text-lg sm:text-xl text-gray-400 max-w-2xl mb-12 leading-relaxed"
-              >
-                Effiziente KI-Lösungen für reale Herausforderungen – von der Idee bis zur Umsetzung.
-              </motion.p>
-
-              <motion.div
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: 0.5, duration: 0.5, ease: "easeOut" }}
-                className="flex flex-col sm:flex-row gap-4 w-full lg:justify-start justify-center"
-              >
-                <motion.a 
-                  whileHover={{ scale: 1.05 }}
-                  whileTap={{ scale: 0.95 }}
-                  transition={springTransition}
-                  href="/kontakt" 
-                  className="px-8 py-4 bg-purple-600 hover:bg-purple-700 text-white rounded-xl font-medium transition-all duration-300 text-center sm:text-left"
-                  aria-label="Projekt starten"
+              <span className="block text-white mb-2">Wir entwickeln</span>
+              <AnimatePresence mode="wait">
+                <motion.span
+                  key={currentWordIndex}
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  exit={{ opacity: 0, y: -20 }}
+                  transition={{ duration: 0.5, ease: "easeInOut" }}
+                  className="block bg-gradient-to-r from-purple-400 to-pink-500 bg-clip-text text-transparent"
                 >
-                  Projekt starten
-                </motion.a>
-                <motion.a 
-                  whileHover={{ scale: 1.05 }}
-                  whileTap={{ scale: 0.95 }}
-                  transition={springTransition}
-                  href="#leistungen" 
-                  className="group flex items-center justify-center gap-2 px-8 py-4 border border-white/20 hover:bg-white/10 text-white rounded-xl font-medium transition-all duration-300"
-                  aria-label="Mehr über unsere Leistungen erfahren"
-                >
-                  <span>Mehr erfahren</span>
-                  <ArrowRight className="w-5 h-5 transform group-hover:translate-x-1 transition-transform" />
-                </motion.a>
-              </motion.div>
+                  {words[currentWordIndex]}
+                </motion.span>
+              </AnimatePresence>
+            </motion.h1>
+
+            <motion.p
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.4, duration: 0.5, ease: "easeOut" }}
+              className="text-base sm:text-lg lg:text-xl text-gray-400 max-w-2xl mb-8 leading-relaxed"
+            >
+              Effiziente KI-Lösungen für reale Herausforderungen – von der Idee bis zur Umsetzung.
+            </motion.p>
+
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.5, duration: 0.5, ease: "easeOut" }}
+              className="flex flex-col sm:flex-row gap-4 w-full sm:w-auto"
+            >
+              <motion.a 
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
+                transition={springTransition}
+                href="/kontakt" 
+                className="w-full sm:w-auto px-6 sm:px-8 py-3 sm:py-4 bg-gradient-to-r from-purple-600 to-indigo-600 text-white rounded-xl font-medium hover:from-purple-500 hover:to-indigo-500 transform transition-all duration-300 shadow-lg hover:shadow-purple-500/25 text-center"
+              >
+                Projekt starten
+              </motion.a>
+              <motion.a 
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
+                transition={springTransition}
+                href="#leistungen" 
+                className="w-full sm:w-auto group flex items-center justify-center gap-2 px-6 sm:px-8 py-3 sm:py-4 bg-white/5 backdrop-blur-sm text-white rounded-xl font-medium hover:bg-white/10 transition-all duration-300"
+              >
+                <span>Mehr erfahren</span>
+                <ArrowRight className="w-5 h-5 transform group-hover:translate-x-1 transition-transform" />
+              </motion.a>
             </motion.div>
           </div>
         </div>
@@ -199,14 +161,14 @@ export default function Home() {
         whileInView="visible"
         viewport={{ once: true, margin: "-100px", amount: 0.3 }}
         variants={sectionVariants}
-        className="py-32 relative"
+        className="py-16 sm:py-24 lg:py-32 relative"
       >
         <div className="absolute inset-0 bg-gradient-to-b from-[#0B0B0F] via-[#0D0D12] to-[#0B0B0F] pointer-events-none"></div>
         <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,_var(--tw-gradient-stops))] from-purple-500/5 via-transparent to-transparent pointer-events-none"></div>
         <div className="container mx-auto px-4 relative">
           <motion.div
             variants={staggerChildren}
-            className="grid grid-cols-2 md:grid-cols-4 gap-4 sm:gap-8"
+            className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6 lg:gap-8"
           >
             {[
               { number: '95%', label: 'Erfolgsrate' },
@@ -235,7 +197,7 @@ export default function Home() {
                   initial={{ opacity: 0 }}
                   whileInView={{ opacity: 1 }}
                   transition={{ duration: 0.5, delay: index * 0.1 + 0.2 }}
-                  className="text-gray-400 text-sm"
+                  className="text-gray-400 text-sm sm:text-base"
                 >
                   {stat.label}
                 </motion.div>
@@ -252,7 +214,7 @@ export default function Home() {
         viewport={{ once: true, margin: "-50px", amount: 0.2 }}
         variants={sectionVariants}
         id="leistungen" 
-        className="py-32 relative"
+        className="py-16 sm:py-24 lg:py-32 relative"
       >
         <div className="absolute inset-0 bg-gradient-to-b from-[#0B0B0F] via-[#0D0D12] to-[#0B0B0F] pointer-events-none"></div>
         <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,_var(--tw-gradient-stops))] from-purple-500/5 via-transparent to-transparent pointer-events-none"></div>
@@ -281,7 +243,7 @@ export default function Home() {
 
           <motion.div
             variants={staggerChildren}
-            className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 sm:gap-6 md:gap-8"
+            className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6 lg:gap-8"
           >
             {[
               {
@@ -311,7 +273,7 @@ export default function Home() {
                 variants={fadeInUp}
                 whileHover={{ y: -10, scale: 1.02 }}
                 transition={springTransition}
-                className="group relative bg-white/5 backdrop-blur-sm rounded-2xl p-8 hover:bg-white/10 transition-all duration-300"
+                className="group relative bg-white/5 backdrop-blur-sm rounded-2xl p-6 sm:p-8 hover:bg-white/10 transition-all duration-300"
               >
                 <motion.div 
                   className={`absolute inset-0 bg-gradient-to-r ${service.gradient} opacity-0 group-hover:opacity-100 rounded-2xl transition-opacity duration-500`}
@@ -320,7 +282,7 @@ export default function Home() {
                   <motion.div 
                     whileHover={{ scale: 1.1, rotate: 5 }}
                     transition={{ duration: 0.3 }}
-                    className="mb-6 text-purple-400"
+                    className="mb-4 sm:mb-6 text-purple-400 flex justify-center sm:justify-start"
                   >
                     {service.icon}
                   </motion.div>
@@ -328,7 +290,7 @@ export default function Home() {
                     initial={{ opacity: 0, y: 20 }}
                     whileInView={{ opacity: 1, y: 0 }}
                     transition={{ duration: 0.5, delay: index * 0.1 }}
-                    className="text-xl sm:text-2xl font-medium mb-4 text-white"
+                    className="text-lg sm:text-xl lg:text-2xl font-medium mb-3 sm:mb-4 text-white text-center sm:text-left"
                   >
                     {service.title}
                   </motion.h3>
@@ -336,15 +298,15 @@ export default function Home() {
                     initial={{ opacity: 0 }}
                     whileInView={{ opacity: 1 }}
                     transition={{ duration: 0.5, delay: index * 0.1 + 0.2 }}
-                    className="text-sm sm:text-base text-gray-400 group-hover:text-gray-300 transition-colors mb-6"
+                    className="text-sm sm:text-base text-gray-400 group-hover:text-gray-300 transition-colors mb-4 sm:mb-6 text-center sm:text-left"
                   >
                     {service.description}
                   </motion.p>
-                  <ul className="space-y-2">
+                  <ul className="space-y-2 sm:space-y-3">
                     {service.benefits.map((benefit, idx) => (
-                      <li key={idx} className="flex items-center text-sm text-gray-300">
+                      <li key={idx} className="flex items-center text-sm sm:text-base text-gray-300 justify-center sm:justify-start">
                         <svg
-                          className="w-4 h-4 mr-2 text-purple-400"
+                          className="w-4 h-4 mr-2 text-purple-400 flex-shrink-0"
                           viewBox="0 0 24 24"
                           fill="none"
                           stroke="currentColor"
@@ -371,14 +333,13 @@ export default function Home() {
         whileInView="visible"
         viewport={{ once: true, margin: "-100px", amount: 0.3 }}
         variants={sectionVariants}
-        className="py-32 relative"
+        className="py-16 sm:py-24 lg:py-32 relative bg-[#0B0B0F]"
       >
-        <div className="absolute inset-0 bg-gradient-to-b from-[#0B0B0F] via-[#0D0D12] to-[#0B0B0F] pointer-events-none"></div>
         <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,_var(--tw-gradient-stops))] from-purple-500/5 via-transparent to-transparent pointer-events-none"></div>
         <div className="container mx-auto px-4 relative">
           <motion.div
             variants={fadeInUp}
-            className="text-center mb-12 sm:mb-16"
+            className="text-center mb-8 sm:mb-12 lg:mb-16"
           >
             <motion.span 
               initial={{ opacity: 0 }}
@@ -392,7 +353,7 @@ export default function Home() {
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5, delay: 0.2 }}
-              className="text-3xl sm:text-4xl md:text-5xl font-light mt-4 text-white"
+              className="text-2xl sm:text-3xl lg:text-5xl font-light mt-4 text-white"
             >
               Unsere Technologien
             </motion.h2>
@@ -400,7 +361,7 @@ export default function Home() {
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5, delay: 0.3 }}
-              className="mt-4 text-gray-400 max-w-2xl mx-auto"
+              className="mt-4 text-gray-400 max-w-2xl mx-auto text-sm sm:text-base"
             >
               Wir setzen auf modernste Technologien und Frameworks, um innovative und skalierbare Lösungen zu entwickeln.
             </motion.p>
@@ -408,47 +369,38 @@ export default function Home() {
 
           <motion.div
             variants={staggerChildren}
-            className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4 sm:gap-8"
+            className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-4 sm:gap-6"
           >
             {[
-              { name: 'GPT-Modelle', icon: <GPTIcon />, description: 'State-of-the-Art KI für natürliche Sprachverarbeitung', color: 'from-purple-500 to-indigo-600' },
-              { name: 'RPA', icon: <RPAIcon />, description: 'Automatisierung von Geschäftsprozessen', color: 'from-indigo-500 to-fuchsia-600' },
-              { name: 'Power Platform', icon: <PowerPlatformIcon />, description: 'Low-Code Entwicklung & Automatisierung', color: 'from-fuchsia-500 to-purple-600' },
-              { name: 'OCR', icon: <OCRIcon />, description: 'Intelligente Dokumentenerkennung', color: 'from-purple-500 to-indigo-600' },
-              { name: 'Datenanalyse', icon: <DataAnalysisIcon />, description: 'Fortschrittliche Datenauswertung', color: 'from-indigo-500 to-fuchsia-600' },
-              { name: 'REST-APIs', icon: <APIIcon />, description: 'Moderne Schnittstellen-Architektur', color: 'from-fuchsia-500 to-purple-600' },
+              { name: 'GPT-Modelle', icon: <GPTIcon />, description: 'State-of-the-Art KI für natürliche Sprachverarbeitung' },
+              { name: 'RPA', icon: <RPAIcon />, description: 'Automatisierung von Geschäftsprozessen' },
+              { name: 'Power Platform', icon: <PowerPlatformIcon />, description: 'Low-Code Entwicklung & Automatisierung' },
+              { name: 'OCR', icon: <OCRIcon />, description: 'Intelligente Dokumentenerkennung' },
+              { name: 'Datenanalyse', icon: <DataAnalysisIcon />, description: 'Fortschrittliche Datenauswertung' },
+              { name: 'REST-APIs', icon: <APIIcon />, description: 'Moderne Schnittstellen-Architektur' },
             ].map((tech, index) => (
               <motion.div
                 key={index}
                 variants={fadeInUp}
                 whileHover={{ y: -5, scale: 1.05 }}
                 transition={springTransition}
-                className="group relative bg-white/5 backdrop-blur-sm rounded-xl p-6 text-center hover:bg-white/10 transition-all duration-300"
+                className="group relative bg-white/5 backdrop-blur-sm rounded-xl p-4 text-center hover:bg-white/10 transition-all duration-300"
               >
-                <motion.div 
-                  className={`absolute inset-0 bg-gradient-to-r ${tech.color} opacity-0 group-hover:opacity-20 rounded-xl transition-opacity duration-500`}
-                />
                 <div className="relative">
                   <motion.div 
                     whileHover={{ scale: 1.2, rotate: 5 }}
                     transition={{ duration: 0.3 }}
-                    className="mb-4 transform group-hover:scale-110 transition-transform flex justify-center"
+                    className="mb-3 transform group-hover:scale-110 transition-transform flex justify-center"
                   >
                     {tech.icon}
                   </motion.div>
                   <motion.h3 
-                    initial={{ opacity: 0, y: 20 }}
-                    whileInView={{ opacity: 1, y: 0 }}
-                    transition={{ duration: 0.5, delay: index * 0.1 }}
-                    className="font-medium text-base text-gray-300 group-hover:text-white transition-colors mb-2"
+                    className="font-medium text-sm text-gray-300 group-hover:text-white transition-colors mb-2"
                   >
                     {tech.name}
                   </motion.h3>
                   <motion.p
-                    initial={{ opacity: 0 }}
-                    whileInView={{ opacity: 1 }}
-                    transition={{ duration: 0.5, delay: index * 0.1 + 0.2 }}
-                    className="text-sm text-gray-400 group-hover:text-gray-300"
+                    className="text-xs text-gray-400 group-hover:text-gray-300"
                   >
                     {tech.description}
                   </motion.p>
@@ -465,14 +417,13 @@ export default function Home() {
         whileInView="visible"
         viewport={{ once: true, margin: "-100px", amount: 0.3 }}
         variants={sectionVariants}
-        className="py-32 relative"
+        className="py-16 sm:py-24 lg:py-32 relative bg-[#0B0B0F]"
       >
-        <div className="absolute inset-0 bg-gradient-to-b from-[#0B0B0F] via-[#0D0D12] to-[#0B0B0F] pointer-events-none"></div>
         <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,_var(--tw-gradient-stops))] from-purple-500/5 via-transparent to-transparent pointer-events-none"></div>
         <div className="container mx-auto px-4 relative">
           <motion.div
             variants={fadeInUp}
-            className="text-center mb-12 sm:mb-16"
+            className="text-center mb-12"
           >
             <motion.span 
               initial={{ opacity: 0 }}
@@ -486,7 +437,7 @@ export default function Home() {
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5, delay: 0.2 }}
-              className="text-3xl sm:text-4xl md:text-5xl font-light mt-4 text-white"
+              className="text-2xl sm:text-3xl lg:text-5xl font-light mt-4 text-white"
             >
               Vertrauen unserer Kunden
             </motion.h2>
@@ -495,7 +446,7 @@ export default function Home() {
           {/* Testimonials Grid */}
           <motion.div
             variants={staggerChildren}
-            className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8"
+            className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"
           >
             {[
               {
@@ -514,13 +465,13 @@ export default function Home() {
               <motion.div
                 key={index}
                 variants={fadeInUp}
-                whileHover={{ y: -10, scale: 1.02 }}
+                whileHover={{ y: -5, scale: 1.02 }}
                 transition={springTransition}
-                className="group relative bg-white/5 backdrop-blur-sm rounded-2xl p-8 hover:bg-white/10 transition-all duration-300"
+                className="group relative bg-white/5 backdrop-blur-sm rounded-2xl p-6 hover:bg-white/10 transition-all duration-300"
               >
-                <div className="absolute top-0 right-0 transform translate-x-4 -translate-y-4">
+                <div className="absolute top-0 right-0 transform translate-x-2 -translate-y-2">
                   <svg
-                    className="w-12 h-12 text-purple-500/20"
+                    className="w-8 h-8 text-purple-500/20"
                     fill="currentColor"
                     viewBox="0 0 32 32"
                   >
@@ -528,10 +479,10 @@ export default function Home() {
                   </svg>
                 </div>
                 <div className="relative">
-                  <p className="text-gray-300 mb-6 italic">{testimonial.quote}</p>
+                  <p className="text-sm text-gray-300 mb-4 italic">{testimonial.quote}</p>
                   <div className="flex items-center">
-                    <div className="ml-4">
-                      <p className="text-gray-400 text-sm">{testimonial.position}</p>
+                    <div>
+                      <p className="text-xs text-gray-400">{testimonial.position}</p>
                     </div>
                   </div>
                 </div>
@@ -547,7 +498,7 @@ export default function Home() {
         whileInView="visible"
         viewport={{ once: true, margin: "-100px", amount: 0.3 }}
         variants={sectionVariants}
-        className="py-32 relative"
+        className="py-16 sm:py-24 lg:py-32 relative"
       >
         <div className="absolute inset-0 bg-gradient-to-b from-[#0B0B0F] via-[#0D0D12] to-[#0B0B0F] pointer-events-none"></div>
         <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,_var(--tw-gradient-stops))] from-purple-500/5 via-transparent to-transparent pointer-events-none"></div>
@@ -559,7 +510,7 @@ export default function Home() {
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5 }}
-              className="text-3xl sm:text-4xl md:text-5xl font-light mb-6 sm:mb-8 text-white"
+              className="text-2xl sm:text-3xl lg:text-5xl font-light mb-4 sm:mb-6 lg:mb-8 text-white px-2"
             >
               Bereit für den nächsten Schritt?
             </motion.h2>
@@ -567,7 +518,7 @@ export default function Home() {
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5, delay: 0.2 }}
-              className="text-lg sm:text-xl text-gray-400 mb-8 sm:mb-12 max-w-2xl mx-auto leading-relaxed"
+              className="text-base sm:text-lg lg:text-xl text-gray-400 mb-6 sm:mb-8 lg:mb-12 max-w-2xl mx-auto leading-relaxed px-4"
             >
               Lassen Sie uns gemeinsam Ihr Projekt besprechen und die perfekte KI-Lösung für Ihr Unternehmen entwickeln.
             </motion.p>
@@ -575,14 +526,14 @@ export default function Home() {
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5, delay: 0.4 }}
-              className="flex flex-col sm:flex-row gap-4 justify-center"
+              className="flex flex-col sm:flex-row gap-4 justify-center px-4 sm:px-0"
             >
               <motion.a
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
                 transition={springTransition}
                 href="/kontakt"
-                className="group relative px-8 py-4 bg-gradient-to-r from-purple-600 to-indigo-600 text-white rounded-xl font-medium hover:from-purple-500 hover:to-indigo-500 transform transition-all duration-300 shadow-lg hover:shadow-purple-500/25"
+                className="group relative px-6 sm:px-8 py-3 sm:py-4 bg-gradient-to-r from-purple-600 to-indigo-600 text-white rounded-xl font-medium hover:from-purple-500 hover:to-indigo-500 transform transition-all duration-300 shadow-lg hover:shadow-purple-500/25 text-sm sm:text-base"
                 aria-label="Termin vereinbaren"
               >
                 <span className="relative z-10">Termin vereinbaren</span>
@@ -593,11 +544,11 @@ export default function Home() {
                 whileTap={{ scale: 0.95 }}
                 transition={springTransition}
                 href="/kontakt"
-                className="group flex items-center justify-center gap-2 px-8 py-4 bg-white/5 backdrop-blur-sm text-white rounded-xl font-medium hover:bg-white/10 transition-all duration-300"
+                className="group flex items-center justify-center gap-2 px-6 sm:px-8 py-3 sm:py-4 bg-white/5 backdrop-blur-sm text-white rounded-xl font-medium hover:bg-white/10 transition-all duration-300 text-sm sm:text-base"
                 aria-label="Chat starten"
               >
                 <span>Chat starten</span>
-                <ArrowRight className="w-5 h-5 transform group-hover:translate-x-1 transition-transform" />
+                <ArrowRight className="w-4 h-4 sm:w-5 sm:h-5 transform group-hover:translate-x-1 transition-transform" />
               </motion.a>
             </motion.div>
           </motion.div>

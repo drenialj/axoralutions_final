@@ -66,7 +66,7 @@ export default function Footer() {
                 Mannheim, Deutschland
               </li>
               <li className="text-gray-400 text-sm">
-                dreni.alij@axoralutions.de
+                dreni.aliji@axoralutions.de
               </li>
               <li className="text-gray-400 text-sm">
                 +49 176 42624008
