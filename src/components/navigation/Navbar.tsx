@@ -195,15 +195,17 @@ export default function Navbar() {
                 <div key={item.name} className="space-y-3">
                   <div 
                     className="flex items-center justify-between"
-                    onClick={() => item.hasDropdown && setActiveDropdown(activeDropdown === item.name ? null : item.name)}
+                    onClick={() => {
+                      if (item.hasDropdown) {
+                        setActiveDropdown(activeDropdown === item.name ? null : item.name);
+                      } else {
+                        setMobileMenuOpen(false);
+                      }
+                    }}
                   >
-                    <Link
-                      href={item.href}
-                      className="text-gray-300 hover:text-white text-lg font-medium"
-                      onClick={() => !item.hasDropdown && setMobileMenuOpen(false)}
-                    >
+                    <span className="text-gray-300 hover:text-white text-lg font-medium">
                       {item.name}
-                    </Link>
+                    </span>
                     {item.hasDropdown && (
                       <ChevronDown className={`h-5 w-5 transition-transform duration-200 ${
                         activeDropdown === item.name ? 'rotate-180' : ''
