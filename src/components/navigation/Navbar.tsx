@@ -184,22 +184,24 @@ export default function Navbar() {
       <AnimatePresence>
         {mobileMenuOpen && (
           <motion.div
-            initial={{ opacity: 0, height: 0 }}
-            animate={{ opacity: 1, height: 'auto' }}
-            exit={{ opacity: 0, height: 0 }}
+            initial={{ opacity: 0, y: -10 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -10 }}
             transition={{ duration: 0.2 }}
-            className="md:hidden fixed inset-x-0 top-16 bottom-0 bg-black/95 backdrop-blur-lg overflow-y-auto"
+            className="md:hidden fixed inset-x-0 top-16 bg-black/95 backdrop-blur-lg border-t border-white/10"
+            style={{ height: 'calc(100vh - 4rem)' }}
           >
-            <div className="px-4 py-6 space-y-6">
+            <div className="px-4 py-6 space-y-4 overflow-y-auto h-full">
               {navigation.map((item) => (
                 <div key={item.name} className="space-y-3">
                   <div 
-                    className="flex items-center justify-between"
+                    className="flex items-center justify-between cursor-pointer"
                     onClick={() => {
                       if (item.hasDropdown) {
                         setActiveDropdown(activeDropdown === item.name ? null : item.name);
                       } else {
                         setMobileMenuOpen(false);
+                        window.location.href = item.href;
                       }
                     }}
                   >
