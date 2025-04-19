@@ -15,4 +15,14 @@ export function gtag_report_conversion(url?: string) {
   }
   
   return false;
+}
+
+export function track_form_submission() {
+  // Google Ads Conversion
+  gtag_report_conversion();
+  
+  // Facebook Pixel Conversion
+  if (typeof window !== 'undefined' && (window as any).fbq) {
+    (window as any).fbq('track', 'Lead');
+  }
 } 

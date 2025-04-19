@@ -4,6 +4,7 @@ import { motion } from 'framer-motion';
 import { Mail, Phone, MapPin, Building2, CheckCircle2, XCircle } from 'lucide-react';
 import { useState } from 'react';
 import { sendContactEmail } from '../actions/contact';
+import { track_form_submission } from '@/utils/analytics';
 
 const contactInfo = [
   {
@@ -75,6 +76,8 @@ export function KontaktContent() {
           company: '',
           message: ''
         });
+        // Conversion-Tracking auslösen
+        track_form_submission();
       }
     } catch (error) {
       setStatus({
