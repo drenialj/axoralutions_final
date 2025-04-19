@@ -5,6 +5,7 @@ import Navbar from "@/components/navigation/Navbar";
 import Chatbot from '@/components/chatbot/Chatbot';
 import Footer from '@/components/Footer';
 import Script from 'next/script';
+import { Analytics } from "@vercel/analytics/react";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -51,6 +52,7 @@ export default function RootLayout({
           {children}
         </main>
         <Footer />
+        <Analytics />
       </body>
     </html>
   );
