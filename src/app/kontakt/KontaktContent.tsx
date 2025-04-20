@@ -6,6 +6,12 @@ import { useState } from 'react';
 import { sendContactEmail } from '../actions/contact';
 import { track_form_submission } from '@/utils/analytics';
 
+declare global {
+  interface Window {
+    gtag_report_conversion: (url?: string) => boolean;
+  }
+}
+
 const contactInfo = [
   {
     icon: <Mail className="w-6 h-6" />,
@@ -221,6 +227,7 @@ export function KontaktContent() {
                 <button
                   type="submit"
                   disabled={isSubmitting}
+                  onClick={() => window.gtag_report_conversion('/kontakt')}
                   className={`w-full px-6 py-3 bg-blue-500 text-white text-sm font-medium rounded-xl hover:bg-blue-600 transition-colors duration-300 flex items-center justify-center ${
                     isSubmitting ? 'opacity-75 cursor-not-allowed' : ''
                   }`}

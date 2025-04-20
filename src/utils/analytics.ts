@@ -1,3 +1,12 @@
+// Declare global gtag function
+declare global {
+  interface Window {
+    gtag: (...args: any[]) => void;
+    dataLayer: any[];
+    fbq: (...args: any[]) => void;
+  }
+}
+
 export function gtag_report_conversion(url?: string) {
   const callback = function () {
     if (typeof(url) != 'undefined') {
@@ -5,8 +14,8 @@ export function gtag_report_conversion(url?: string) {
     }
   };
   
-  if (typeof window !== 'undefined' && (window as any).gtag) {
-    (window as any).gtag('event', 'conversion', {
+  if (typeof window !== 'undefined' && window.gtag) {
+    window.gtag('event', 'conversion', {
       'send_to': 'AW-17019452246/mOyyCL2e3roaENb2wLM_',
       'value': 1.0,
       'currency': 'EUR',
@@ -22,7 +31,7 @@ export function track_form_submission() {
   gtag_report_conversion();
   
   // Facebook Pixel Conversion
-  if (typeof window !== 'undefined' && (window as any).fbq) {
-    (window as any).fbq('track', 'Lead');
+  if (typeof window !== 'undefined' && window.fbq) {
+    window.fbq('track', 'Lead');
   }
 } 
