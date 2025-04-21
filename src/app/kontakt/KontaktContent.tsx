@@ -227,7 +227,6 @@ export function KontaktContent() {
                 <button
                   type="submit"
                   disabled={isSubmitting}
-                  onClick={() => window.gtag_report_conversion('/kontakt')}
                   className={`w-full px-6 py-3 bg-blue-500 text-white text-sm font-medium rounded-xl hover:bg-blue-600 transition-colors duration-300 flex items-center justify-center ${
                     isSubmitting ? 'opacity-75 cursor-not-allowed' : ''
                   }`}
